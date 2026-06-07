@@ -1,0 +1,27 @@
+// Last updated: 6/7/2026, 6:29:23 PM
+class Solution {
+    public int minimumDistance(int[] nums) {
+        Map<Integer, List<Integer>> mp = new HashMap<>();
+        int n = nums.length;
+
+        // Store indices for each value
+        for (int i = 0; i < n; i++) {
+            mp.computeIfAbsent(nums[i], k -> new ArrayList<>()).add(i);
+        }
+
+        int ans = Integer.MAX_VALUE;
+
+        // Process each value
+        for (List<Integer> indices : mp.values()) {
+            if (indices.size() < 3) continue;
+
+            // Try consecutive triplets
+            for (int i = 0; i + 2 < indices.size(); i++) {
+                int dist = 2 * (indices.get(i + 2) - indices.get(i));
+                ans = Math.min(ans, dist);
+            }
+        }
+
+        return ans == Integer.MAX_VALUE ? -1 : ans;
+    }
+}
