@@ -1,0 +1,15 @@
+// Last updated: 6/7/2026, 6:29:29 PM
+class Solution {
+    public long removeZeros(long n) {
+        long res = 0, mult = 1;
+        while (n > 0) {
+            long rem = n % 10;
+            if (rem != 0) {
+                res += rem * mult;
+                mult *= 10;
+            }
+            n /= 10;
+        }
+        return res;
+    }
+}
